@@ -1,1 +1,5 @@
-<resources><string name="widget_desc">今日服药进度与快速打卡</string></resources>
+<resources>
+<string name="widget_desc">中 2×2：今日进度、下一次服药、打卡</string>
+<string name="widget_desc_small">小 2×1：下一次服药时间、打卡</string>
+<string name="widget_desc_large">大 4×2：今日服药清单与状态、打卡</string>
+</resources>
