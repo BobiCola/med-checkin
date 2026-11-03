@@ -51,3 +51,7 @@
 发布版签名：在 `keystore/` 目录放入 `release.jks` 和 `keystore.properties`（storeFile / storePassword / keyAlias / keyPassword）。签名文件不在仓库中，请自行妥善保管；必须使用同一签名才能覆盖安装升级。
 
 也可以用 Android Studio 打开本目录直接运行。
+
+## 开源协议
+
+本项目采用 [Unlicense](LICENSE) 发布到公共领域，任何人可以自由复制、修改、发布、商用，无需署名。
