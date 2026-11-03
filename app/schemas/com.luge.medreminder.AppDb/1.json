@@ -1,0 +1,325 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "a9eae32d16f0c57b5564f961033aa64a",
+    "entities": [
+      {
+        "tableName": "medicine",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `dosage` TEXT NOT NULL, `startDate` TEXT NOT NULL, `endDate` TEXT, `freq` TEXT NOT NULL, `everyN` INTEGER NOT NULL, `weekdays` INTEGER NOT NULL, `sort` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dosage",
+            "columnName": "dosage",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDate",
+            "columnName": "startDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endDate",
+            "columnName": "endDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "freq",
+            "columnName": "freq",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "everyN",
+            "columnName": "everyN",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "weekdays",
+            "columnName": "weekdays",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sort",
+            "columnName": "sort",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "dose_slot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `medId` TEXT NOT NULL, `label` TEXT NOT NULL, `hour` INTEGER NOT NULL, `minute` INTEGER NOT NULL, `sort` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "medId",
+            "columnName": "medId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hour",
+            "columnName": "hour",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minute",
+            "columnName": "minute",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sort",
+            "columnName": "sort",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_dose_slot_medId",
+            "unique": false,
+            "columnNames": [
+              "medId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_dose_slot_medId` ON `${TABLE_NAME}` (`medId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "intake_record",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `medId` TEXT NOT NULL, `slotId` TEXT NOT NULL, `date` TEXT NOT NULL, `scheduledMin` INTEGER NOT NULL, `label` TEXT NOT NULL, `status` TEXT NOT NULL, `takenAt` INTEGER NOT NULL, `note` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "medId",
+            "columnName": "medId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slotId",
+            "columnName": "slotId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "scheduledMin",
+            "columnName": "scheduledMin",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "takenAt",
+            "columnName": "takenAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "note",
+            "columnName": "note",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_intake_record_date",
+            "unique": false,
+            "columnNames": [
+              "date"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_intake_record_date` ON `${TABLE_NAME}` (`date`)"
+          },
+          {
+            "name": "index_intake_record_medId",
+            "unique": false,
+            "columnNames": [
+              "medId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_intake_record_medId` ON `${TABLE_NAME}` (`medId`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "daily_plan_snapshot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `medId` TEXT NOT NULL, `slotId` TEXT NOT NULL, `label` TEXT NOT NULL, `minutes` INTEGER NOT NULL, PRIMARY KEY(`date`, `medId`, `slotId`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "medId",
+            "columnName": "medId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "slotId",
+            "columnName": "slotId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "label",
+            "columnName": "label",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minutes",
+            "columnName": "minutes",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date",
+            "medId",
+            "slotId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "inventory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`medId` TEXT NOT NULL, `enabled` INTEGER NOT NULL, `remaining` REAL NOT NULL, `perDose` REAL NOT NULL, `unit` TEXT NOT NULL, `lowThreshold` REAL NOT NULL, PRIMARY KEY(`medId`))",
+        "fields": [
+          {
+            "fieldPath": "medId",
+            "columnName": "medId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "enabled",
+            "columnName": "enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "remaining",
+            "columnName": "remaining",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perDose",
+            "columnName": "perDose",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "unit",
+            "columnName": "unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lowThreshold",
+            "columnName": "lowThreshold",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "medId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a9eae32d16f0c57b5564f961033aa64a')"
+    ]
+  }
+}
